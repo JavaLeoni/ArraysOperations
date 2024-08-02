@@ -32,7 +32,13 @@ public class Main {
             if (rnd.nextBoolean()) arrayNums[loopIndex] = Math.negateExact(arrayNums[loopIndex]);
         }
 
+        leastNumberPosition = 1;
+        leastNumber = arrayNums[leastNumberPosition-1];
+        biggestNumberPosition = 1;
+        biggestNumber = arrayNums[biggestNumberPosition-1];
+
         //Перевірка масиву
+        //Якщо в масиві кілька найбільших або найменших елементів номер той який перший попався
         for (loopIndex = 0; loopIndex < arrayNums.length; loopIndex++) {
 
             if (arrayNums[loopIndex] < 0) negativeNumbersSum += arrayNums[loopIndex];
@@ -61,7 +67,7 @@ public class Main {
             averageNumber += arrayNums[loopIndex];
             averageItemCount++;
         }
-        if (averageItemCount > 0) averageNumber = averageNumber / averageItemCount;
+        if (averageItemCount > 0) averageNumber /= averageItemCount;
 
 
         //Вивід
@@ -71,9 +77,14 @@ public class Main {
         System.out.println("Кількість непарних чисел: " + oddNumbersCount);
         System.out.println("Найменший елемент: " + leastNumber + " (з індексом " + leastNumberPosition + ")");
         System.out.println("Найбільший елемент: " + biggestNumber + " (з індексом " + biggestNumberPosition + ")");
-        if (firstNegativeNumbersPosition >= 0)
+
+        if ((firstNegativeNumbersPosition >= 0) && (firstNegativeNumbersPosition < (arrayNums.length-1)))
             System.out.printf("Середнє арифметичне чисел після першого від'ємного числа: %.2f", averageNumber);
-        else
+
+        if (firstNegativeNumbersPosition == (arrayNums.length-1))
+            System.out.printf("Неможливо обчислити середнє арифмтичне елементів масиву. Перше від'єме число останній елемент масиву");
+
+        if (firstNegativeNumbersPosition <0)
             System.out.println("Від'ємні числа в масиві не знайдені");
     }
 }
